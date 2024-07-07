@@ -4,3 +4,7 @@
 
 # 構成
 検討中
+
+# 試験申し込み
+基本的には７月第２週より
+https://www.ipa.go.jp/shiken/mousikomi/moushikomi.html
