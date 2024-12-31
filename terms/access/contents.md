@@ -142,7 +142,6 @@ OASISが標準化している仕様。ユーザにアサーションを発行す
 
 なりすましの防御策としてデジタル署名をしている
 
-
 #### LDAPサーバー
 
 [ディレクトリサービス](https://wa3.i-3-i.info/word12422.html)を提供する[サーバ](https://wa3.i-3-i.info/word144.html)のうち、[LDAP](https://wa3.i-3-i.info/word12692.html)に対応しているやつ
@@ -150,7 +149,6 @@ OASISが標準化している仕様。ユーザにアサーションを発行す
 ディレクトリサービスは、[ネットワーク](https://wa3.i-3-i.info/word157.html)の世界における「俺がいろんな情報をまとめて管理しているから、なにか困ったことがあったら俺に聞いてこい」型[サービス](https://wa3.i-3-i.info/word11386.html)
 
 LDAPはディレクトリサービスとやり取りするためのプロトコル
-
 
 ## OAuth
 
@@ -166,7 +164,6 @@ Oauthは、あるWEBサービスが保有するリソースを、利用者が別
 - client
 - resource server
 - authorization server
-
 
 ##### CSRFの脅威
 
@@ -184,7 +181,6 @@ OAuthは認証機能を持たない仕様。
 
 OAuthの上に認証レイヤを実装したものがOIDC(認証レイヤ　マウンテッド　オン　OAuth)
 
-
 ## Kerberos認証
 
 MS社のアクティブディレクトリで採用されている方式
@@ -196,3 +192,10 @@ __内容__
 レルムの範囲内で全体を管理するサーバでレルムの範囲内に存在するすべてのクライアントとサーバー間の認証を行う。
 
 サーバーとクライアント間でSSOを実現が可能(やり取りの間にSVで認証と証書を発行することで)
+
+KDC:Kerberosで全体を管理するサーバー。
+
+
+## **フォーム認証**
+
+**フォーム認証** （Form認証）とは、[Webサイト](https://e-words.jp/w/Web%E3%82%B5%E3%82%A4%E3%83%88.html)の認証方式の一つで、[Webページ](https://e-words.jp/w/Web%E3%83%9A%E3%83%BC%E3%82%B8.html)に[form](https://e-words.jp/w/%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0.html)[タグ](https://e-words.jp/w/%E3%82%BF%E3%82%B0.html)などで[ユーザー](https://e-words.jp/w/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC.html)名や[パスワード](https://e-words.jp/w/%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89.html)などの[入力フォーム](https://e-words.jp/w/%E5%85%A5%E5%8A%9B%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0.html)を作り、[利用者](https://e-words.jp/w/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC.html)が内容を[入力](https://e-words.jp/w/%E5%85%A5%E5%8A%9B.html)して[Webサーバ](https://e-words.jp/w/Web%E3%82%B5%E3%83%BC%E3%83%90.html)に送信することで[認証](https://e-words.jp/w/%E8%AA%8D%E8%A8%BC.html)を[行](https://e-words.jp/w/%E8%A1%8C.html)うもの。
