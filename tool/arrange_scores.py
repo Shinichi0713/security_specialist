@@ -1,7 +1,6 @@
 # 機能：プロジェクト全体に存在するarchive_solvesエクセルを検出してスコアを集計する
 import glob, os
 import pandas as pd
-from openpyxl import load_workbook
 
 class ArrangeScores:
     def __init__(self):
@@ -20,6 +19,11 @@ class ArrangeScores:
                 df = pd.concat([df, self.__get_scores(filepath)])
             else:
                 df = self.__get_scores(filepath)
+
+        header_to_remove = 'シート番号'
+        if header_to_remove in df.columns:
+            # ヘッダーを削除
+            df = df.drop(columns=[header_to_remove])
         self.__write_overview(df)
 
     # ターゲットフォルダ配下のファイルを取得する
@@ -34,18 +38,11 @@ class ArrangeScores:
         return df
     
     def __write_overview(self, df):
-        book = load_workbook(self.filepath_output, keep_vba=True)
         # 書き込みたいシートを指定 
         # pd.ExcelWriterを使って既存のワークブックに書き込む
-        with pd.ExcelWriter(self.filepath_output, engine='openpyxl') as writer:
-            writer.book = book
-            writer.sheets = {ws.title: ws for ws in book.worksheets}
-            
+        with pd.ExcelWriter(self.filepath_output, engine='openpyxl') as writer:            
             # データフレームを書き込む
             df.to_excel(writer, sheet_name=self.sheet_write_target, index=False)
-            writer.save()
-        # データフレームを書き込む 
-        # book.save(self.filepath_output)
 
 if __name__ == "__main__":
     arrange_op = ArrangeScores()
