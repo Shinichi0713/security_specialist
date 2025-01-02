@@ -14,16 +14,21 @@ class ArrangeScores:
     
     def arrange_scores(self, folder_target):
         filepaths = self.__get_files(folder_target)
+        filepaths_df = []
         for filepath in filepaths:
             if "df" in locals():
-                df = pd.concat([df, self.__get_scores(filepath)])
+                df_add = self.__get_scores(filepath)
+                df = pd.concat([df, df_add])
+                filepaths_df.extend([filepath for _ in range(len(df_add))])
             else:
                 df = self.__get_scores(filepath)
-
+                filepaths_df.extend([filepath for _ in range(len(df))])
+        new_df = pd.DataFrame(filepaths_df, columns=['ファイルパス'], index=None)
         header_to_remove = 'シート番号'
         if header_to_remove in df.columns:
             # ヘッダーを削除
             df = df.drop(columns=[header_to_remove])
+        df = pd.concat([df.reset_index(drop=True), new_df.reset_index(drop=True)], axis=1)
         self.__write_overview(df)
 
     # ターゲットフォルダ配下のファイルを取得する
