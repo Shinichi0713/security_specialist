@@ -276,3 +276,18 @@ LDAP（ディレクトリサービスとやり取りするときに使うお約�
 以前は[パス](https://e-words.jp/w/%E3%83%91%E3%82%B9.html)や[クエリ](https://e-words.jp/w/%E3%82%AF%E3%82%A8%E3%83%AA.html)など完全な[URL](https://e-words.jp/w/URL.html)を記録するのが原則だったが、[利用者](https://e-words.jp/w/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC.html)の[ネット](https://e-words.jp/w/%E3%83%8D%E3%83%83%E3%83%88.html)上での活動履歴を[サイト](https://e-words.jp/w/%E3%82%B5%E3%82%A4%E3%83%88.html)運営者に知らせることになるため、近年では異なる[ドメイン](https://e-words.jp/w/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)間の遷移では[ドメイン](https://e-words.jp/w/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)名部分しか送らない（「[https:](https://e-words.jp/w/HTTPS.html)//[example.jp](https://e-words.jp/w/example.com.html)/[dir](https://e-words.jp/w/dir%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89.html)/page.[html](https://e-words.jp/w/HTML.html)?q=[query](https://e-words.jp/w/%E3%82%AF%E3%82%A8%E3%83%AA.html)」→「[https:](https://e-words.jp/w/HTTPS.html)//exmaple[.jp](https://e-words.jp/w/JP%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)/」）よう変更されている。
 
 
+#### JSONP（JSON with Padding）
+異なるドメイン間でデータを取得するための技術です。
+通常、ウェブブラウザはセキュリティ上の理由から、同一生成元ポリシーにより、異なるドメインからのデータ取得を制限しています。
+しかし、JSONPを使用すると、この制約を回避できます。
+JSONPはHTMLの<script>タグを利用してデータを取得します。<script>タグは異なるドメインからJavaScriptファイルを読み込むことができるため、この特性を利用してデータを取得します。サーバー側では、クライアントからのリクエストに対して、JavaScript関数を呼び出す形式でデータを返します。
+```
+<script src="https://example.com/data?callback=parseResponse"></script>
+```
+
+```JSON
+parseResponse({"name": "John", "age": 30});
+```
+JSONPは便利な技術ですが、セキュリティ上のリスクも伴います。例えば、クロスサイトリクエストフォージェリ（CSRF）攻撃のリスクがあるため、機密情報の取り扱いには注意が必要です。
+
+
