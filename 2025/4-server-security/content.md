@@ -46,7 +46,40 @@
 
 ## WEBサーバーのセキュリティ
 
+WEBサーバーからWEBサーバーに送るデータをリクエスト、サーバーからブラウザに送られるデータはレスポンス。
 
+#### GETメソッド
+
+GetメソッドはブラウザからWEBサーバーにリクエストを送信するときに使われるメソッド。
+
+セキュリティ面では不都合な点あり。フォームより入力したデータは、URL後半のクエリとして返されることになる。ログにも残るし、リファラでリンク先にも送信される→漏洩の可能性がある。
+
+#### POSTメソッド
+
+入力情報をサーバーに送信する際にリクエストボディを使って送信するため、少しは安全性が改善することが出来る。
+
+#### Cookieを利用したセッション管理
+
+HTTP通信は、ステートレスな通信＝リクエストとレスポンスのやり取りで完結する通信。
+
+WEBの通販サイトなどのような一連の画面遷移が必要な場合、セッション管理が必要となる。
+
+セッション管理の代表例がCookieを用いる方法。
+
+Cookieとはサーバとクライアントでやり取りされるテキストデータ。
+
+WEBサーバーからのHTTPレスポンスに①"Set-Cookie"でCookieを使用することを宣言、②セッションIDを記述、しておくと、ブラウザはCookieの値を保持して、アクセスごとのCookieのセッションIDを付けてサーバーに送付するようになる。→これにより連続性のある処理が出来るようになる。
+
+Cookieには属性を指定することが出来る。推奨される設定は以下の通り
+
+1. domain
+   domain=itec.co.jpのように指定→指定したドメインとサブドメインのみにcookieを送信するようになる
+2. expires
+   有効期限。日時で指定。ほかにMax-Ageで指定が可能
+3. secure
+   設定すると、http通信で保護されているときしかcookieを送信しなくなる
+4. HttpOnly
+   設定すると、cookieへのアクセスがhttpからのみになる。→javascript等のスクリプトからアクセスできなくなる。このためXSS脆弱性があってもcookieから読み取られなくなる。
 
 
 
@@ -63,3 +96,16 @@ LDAP（ディレクトリサービスとやり取りするときに使うお約�
 例えば、プリンタの場所やユーザーの認証情報などを管理します。ディレクトリサービスを提供するコンピュータは「サーバ」と呼ばれ、他のコンピュータが必要な情報を問い合わせると、その情報を提供します
 
 ディレクトリサービスの例としては、WindowsのActive Directoryが有名です。ディレクトリサービスを利用する際には、通信プロトコルとしてLDAP（Lightweight Directory Access Protocol）がよく使われます
+
+
+
+#### リファラ
+
+[Webブラウザ](https://e-words.jp/w/Web%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6.html)が[Webサーバ](https://e-words.jp/w/Web%E3%82%B5%E3%83%BC%E3%83%90.html)への[HTTPリクエスト](https://e-words.jp/w/HTTP%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88.html)送信時に「Referer:」[ヘッダ](https://e-words.jp/w/%E3%83%98%E3%83%83%E3%83%80.html)で申告する[情報](https://e-words.jp/w/%E6%83%85%E5%A0%B1.html)で、これをたどっていくと閲覧者がどこの[サイト](https://e-words.jp/w/%E3%82%B5%E3%82%A4%E3%83%88.html)から[訪問](https://e-words.jp/w/%E3%83%93%E3%82%B8%E3%83%83%E3%83%88.html)したのか、また、[サイト](https://e-words.jp/w/%E3%82%B5%E3%82%A4%E3%83%88.html)内でどのような軌跡をたどったのかなどを調べることができる。
+
+
+##### Refererヘッダ
+
+[Webブラウザ](https://e-words.jp/w/Web%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6.html)はページの[リンク](https://e-words.jp/w/%E3%83%AA%E3%83%B3%E3%82%AF.html)を[クリック](https://e-words.jp/w/%E3%82%AF%E3%83%AA%E3%83%83%E3%82%AF.html)あるいは[タップ](https://e-words.jp/w/%E3%82%BF%E3%83%83%E3%83%97.html)して次のページに移る際に、遷移元のページの[URL](https://e-words.jp/w/URL.html)をReferer[ヘッダ](https://e-words.jp/w/%E3%83%98%E3%83%83%E3%83%80.html)として[HTTPリクエストヘッダ](https://e-words.jp/w/HTTP%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%83%98%E3%83%83%E3%83%80.html)中に記載することになっている。記載の可否や内容はReferer-Policy[ヘッダ](https://e-words.jp/w/%E3%83%98%E3%83%83%E3%83%80.html)や[HTMLファイル](https://e-words.jp/w/HTML%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.html)中の[metaタグ](https://e-words.jp/w/meta%E8%A6%81%E7%B4%A0.html)である程度指定できる。
+
+以前は[パス](https://e-words.jp/w/%E3%83%91%E3%82%B9.html)や[クエリ](https://e-words.jp/w/%E3%82%AF%E3%82%A8%E3%83%AA.html)など完全な[URL](https://e-words.jp/w/URL.html)を記録するのが原則だったが、[利用者](https://e-words.jp/w/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC.html)の[ネット](https://e-words.jp/w/%E3%83%8D%E3%83%83%E3%83%88.html)上での活動履歴を[サイト](https://e-words.jp/w/%E3%82%B5%E3%82%A4%E3%83%88.html)運営者に知らせることになるため、近年では異なる[ドメイン](https://e-words.jp/w/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)間の遷移では[ドメイン](https://e-words.jp/w/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)名部分しか送らない（「[https:](https://e-words.jp/w/HTTPS.html)//[example.jp](https://e-words.jp/w/example.com.html)/[dir](https://e-words.jp/w/dir%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89.html)/page.[html](https://e-words.jp/w/HTML.html)?q=[query](https://e-words.jp/w/%E3%82%AF%E3%82%A8%E3%83%AA.html)」→「[https:](https://e-words.jp/w/HTTPS.html)//exmaple[.jp](https://e-words.jp/w/JP%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)/」）よう変更されている。
