@@ -120,6 +120,66 @@ http://example.com/redirect.php?to=home%0d%0aSet-Cookie:%20sessionId=abcd1234
 
 %0d%0aが2回続くと、空白行が２個あることになる→ヘッダとボディを分けることになる
 
+###### 重要ファイルを公開ディレクトリにおかない
+検索エンジンにひっかかったり、ディレクトリトラバーサル攻撃により重要ファイルが流出する可能性がある
+
+###### HTTP認証
+HTTPプロトコルに標準で用意されている認証方式＝HTTP認証をもちいることがある
+- Basic認証
+  入力したIDとPWを平文で送出することになるため危険
+- Digest認証
+　Basic認証の弱点を改善した手法で、IDとPWをハッシュ化して送出する
+　1. サーバーでランダムな文字列(nond3)を生成し、クライアントに送信
+　2. ユーザがログインIDとPWを入力
+　3. PWにnonceを付与し、ハッシュ化したデータをサーバーに送信
+　4. サーバー側で受信データを確認する
+　※nonce：暗号や認証プロトコルで仕様される使い捨てのランダムな文字列のこと
+
+##### オープンリダイレクト対策
+次のようなURLを実行し、システムにアクセスした際に別のサイトに異動させる機能。
+Webアプリケーションのリダイレクト機能を悪用して、ユーザーを攻撃者が用意したページに誘導する脆弱性。
+```
+https://example.com/redirect?url=https://malicious-site.com
+```
+この場合、この場合、https://example.comのサブドメインに見せかけたhttps://example.com.evil.comにリダイレクト
+```
+https://example.com/redirect?url=https://example.com.evil.com
+```
+##### CORS
+CORS（Cross-Origin Resource Sharing）は、異なるオリジン間でリソースを共有するための仕組みです。通常、ウェブブラウザはセキュリティ上の理由から、同一オリジンポリシー（Same-Origin Policy）を適用し、異なるオリジンからのリクエストを制限します。しかし、CORSを使用することで、特定の条件下で異なるオリジンからのリクエストを許可することができる。
+
+__CORSの仕組み__
+リクエスト送信: クライアント（ブラウザ）がサーバにリクエストを送信します。
+サーバの応答: サーバは特定のHTTPヘッダー（例: Access-Control-Allow-Origin）を使用して、どのオリジンからのリクエストを許可するかを指定します。
+ブラウザの確認: ブラウザはサーバの応答を確認し、許可されたオリジンからのリクエストであればリソースにアクセスします。
+※サーバーがアクセスして良いオリジンを指定する仕組み→ブラウザが変はサイトからのレスポンスを受けることがなくなる仕組み
+
+##### WAF
+Webaアプリケーションへの攻撃を防ぐために、サーバー側に導入されるものがWAF。
+問題ある通信パターンを遮断や無害化。
+正常な通信のみを通過させる。
+PCI DSSでは、一般公開されているWebアプリケーションは、定期的な脆弱性への対応か、WAFの導入をしなければならないと定めている。
+
+例:aws waf設定例
+```
+{
+  "Name": "BlockSpecificIP",
+  "Priority": 1,
+  "Action": {
+    "Block": {}
+  },
+  "Statement": {
+    "IPSetReferenceStatement": {
+      "ARN": "arn:aws:wafv2:region:account-id:ipset/BlockIPSet"
+    }
+  },
+  "VisibilityConfig": {
+    "SampledRequestsEnabled": true,
+    "CloudWatchMetricsEnabled": true,
+    "MetricName": "BlockSpecificIP"
+  }
+}
+```
 
 ## LDAPサーバー
 
