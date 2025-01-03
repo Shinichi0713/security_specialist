@@ -81,6 +81,44 @@ Cookieには属性を指定することが出来る。推奨される設定は�
 4. HttpOnly
    設定すると、cookieへのアクセスがhttpからのみになる。→javascript等のスクリプトからアクセスできなくなる。このためXSS脆弱性があってもcookieから読み取られなくなる。
 
+#### 脅威
+##### セッションハイジャック
+HTTPセッション管理ではCookieを用いる手法が一般的となっている。
+そのほかの方法には以下のようなものもある。
+- クエリストリングにセッションIDを含める方法
+- hiddenフィールドにセッションIDを含める方法
+上記のセッションIDが処理の連続性を保つ情報となる→盗聴or推測されるとなりすましされる。
+__対応法__
+- cookieの取り扱いを安全にする
+- 推測しづらいセッションIDにする
+- 必要最低限のdomainと有効期限を設定する。httponlyもできる限り設定
+
+##### セッションフィクセーション
+攻撃手順は以下の通り
+1. 攻撃者が、正規のWEBサイトよりセッションIDを取得する
+2. 別の利用者に対して、セッションIDを送り込み、正規のWEBサイトにログインする
+3. ログイン状態になったら、攻撃者が利用者になりすます
+※上記攻撃は、ブラウザにcookieモンスターバグという脆弱性がある場合や、HTTPヘッダインジェクションの脆弱性がある場合、攻撃者の用意したcookieを受け入れてしまい攻撃が成功する
+
+__対応法__
+認証が終わった後、WEBサイトが新規のセッションIDを発行する。
+
+##### HTTPヘッダインジェクション
+HTTPリクエストのクエリストリングに、不正コードを挿入して、悪意あるスクリプトを埋め込んだHTTPレスポンスを作成して、ブラウザに攻撃者の悪意を持つフォームを表示させるなどのHTTPヘッダに悪意あるコードを混入させる攻撃を、HTTPヘッダインジェクションと呼ぶ。
+HTTPヘッダインジェクションは、ユーザーが入力したデータを適切に検証せずにHTTPレスポンスヘッダに反映させることで発生する脆弱性。
+例. 以下サイトにアクセスする
+```http
+http://example.com/redirect.php?to=home
+```
+このサイトに対して、以下のようなクエリストリングを追加する
+```http
+http://example.com/redirect.php?to=home%0d%0aSet-Cookie:%20sessionId=abcd1234
+```
+このクエリストリングの%0d%0aは、CRLF（キャリッジリターンとラインフィード）を表し、HTTPヘッダの改行を意味します。このように改行を挿入することで、新しいHTTPヘッダを追加することができます。この例では、Set-Cookie: sessionId=abcd1234という新しいヘッダが追加され、セッションIDが固定されてしまいます。
+
+このような攻撃を防ぐためには、ユーザー入力を適切にサニタイズし、改行コードを含む不正なデータを除去することが重要です。
+
+%0d%0aが2回続くと、空白行が２個あることになる→ヘッダとボディを分けることになる
 
 
 ## LDAPサーバー
@@ -109,3 +147,5 @@ LDAP（ディレクトリサービスとやり取りするときに使うお約�
 [Webブラウザ](https://e-words.jp/w/Web%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6.html)はページの[リンク](https://e-words.jp/w/%E3%83%AA%E3%83%B3%E3%82%AF.html)を[クリック](https://e-words.jp/w/%E3%82%AF%E3%83%AA%E3%83%83%E3%82%AF.html)あるいは[タップ](https://e-words.jp/w/%E3%82%BF%E3%83%83%E3%83%97.html)して次のページに移る際に、遷移元のページの[URL](https://e-words.jp/w/URL.html)をReferer[ヘッダ](https://e-words.jp/w/%E3%83%98%E3%83%83%E3%83%80.html)として[HTTPリクエストヘッダ](https://e-words.jp/w/HTTP%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%83%98%E3%83%83%E3%83%80.html)中に記載することになっている。記載の可否や内容はReferer-Policy[ヘッダ](https://e-words.jp/w/%E3%83%98%E3%83%83%E3%83%80.html)や[HTMLファイル](https://e-words.jp/w/HTML%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.html)中の[metaタグ](https://e-words.jp/w/meta%E8%A6%81%E7%B4%A0.html)である程度指定できる。
 
 以前は[パス](https://e-words.jp/w/%E3%83%91%E3%82%B9.html)や[クエリ](https://e-words.jp/w/%E3%82%AF%E3%82%A8%E3%83%AA.html)など完全な[URL](https://e-words.jp/w/URL.html)を記録するのが原則だったが、[利用者](https://e-words.jp/w/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC.html)の[ネット](https://e-words.jp/w/%E3%83%8D%E3%83%83%E3%83%88.html)上での活動履歴を[サイト](https://e-words.jp/w/%E3%82%B5%E3%82%A4%E3%83%88.html)運営者に知らせることになるため、近年では異なる[ドメイン](https://e-words.jp/w/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)間の遷移では[ドメイン](https://e-words.jp/w/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)名部分しか送らない（「[https:](https://e-words.jp/w/HTTPS.html)//[example.jp](https://e-words.jp/w/example.com.html)/[dir](https://e-words.jp/w/dir%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89.html)/page.[html](https://e-words.jp/w/HTML.html)?q=[query](https://e-words.jp/w/%E3%82%AF%E3%82%A8%E3%83%AA.html)」→「[https:](https://e-words.jp/w/HTTPS.html)//exmaple[.jp](https://e-words.jp/w/JP%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3.html)/」）よう変更されている。
+
+
