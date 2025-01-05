@@ -18,6 +18,10 @@
 
 基本的には７月第２週より
 https://www.ipa.go.jp/shiken/mousikomi/moushikomi.html
+2024/12
+R7の春季申し込みは以下より
+1/17より申し込み受付
+https://www.ipa.go.jp/shiken/2025/r07haru_exam.html
 
 # 反省点
 
