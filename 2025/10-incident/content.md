@@ -103,3 +103,13 @@ JVN
 CVSS
 
 共通脆弱性評価システム。IT製品や情報システムの脆弱性に対するオープンで汎用的な評価手法。
+
+#### /etc/hosts.allow
+/etc/hosts.allow、/etc/hosts.denyは、自ホスト（つまり、自分のコンピュータ）へのアクセスを制御するためのファイル
+「/etc/hosts.allow」ファイルにはアクセスを許可するサービスとホストを、「/etc/hosts.deny」ファイルにはアクセスを拒否するサービスとホストを記述します。
+
+```
+in.telnetd: 192.168.0. 
+in.ftpd: 192.168.0.  host.example.com
+sshd: 192.168.0.  host.example.com
+```
