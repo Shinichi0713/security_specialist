@@ -50,7 +50,6 @@ RA（Registration Authority）:
 役割: デジタル証明書の発行に先立ち、利用者からの登録申請を受け付け、申請内容の承認や認可を行う機関です。RAは、申請者の身元確認や必要な情報の収集を行い、その情報をCAに提供します。
 具体例: 企業内で従業員のデジタル証明書の申請を管理する部門などが該当します。
 
-
 #### 問題
 
 * デジタル証明書を検証する際に確認する2つの項目は何ですか？
@@ -61,7 +60,6 @@ RA（Registration Authority）:
 * SSLインスペクションの目的は何ですか？
 * SSLインスペクションで復号化を行うための2つのポイントは何ですか？
 * SSLアクセラレータとは何ですか？
-
 
 解答
 
@@ -113,3 +111,51 @@ RA（Registration Authority）:
 * **SSLアクセラレータとは何ですか？**
   * **回答** : SSLアクセラレーションを行う、ハードウェア
   * **評価: 正解**
+
+
+#### SNI
+
+SSL/TLSの拡張子の一つにSNI
+
+RFC6066
+
+クライアントがアクセスしたいFQDNを伝え、サーバー側がホストに対応したデジタル証明書を返す
+
+SSL/TLSの脆弱性
+
+#### ダウングレード攻撃
+
+SSL/TLSの暗号スイートを決めるときに、弱い暗号スイートを強制する
+
+
+#### 暗号化スイート
+
+英語で Cipher Suites
+
+TLSの暗号通信のためのプロトコルで複数の暗号化アルゴリズムの組み合わせ
+
+
+###### 暗号化スイートには4つの要素
+
+* `Kx` : 鍵交換に使われる暗号化アルゴリズム
+* `Au` : 認証に使われる暗号化アルゴリズム
+* `Enc` : アプリケーション層の暗号化に使われるアルゴリズム
+* `Mac` : メッセージの検証に使われるアルゴリズム
+
+```
+[root@localhost ~]# openssl ciphers -v
+ECDHE-RSA-AES256-GCM-SHA384 TLSv1.2 Kx=ECDH     Au=RSA  Enc=AESGCM(256) Mac=AEAD
+ECDHE-ECDSA-AES256-GCM-SHA384 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(256) Mac=AEAD
+ECDHE-RSA-AES256-SHA384 TLSv1.2 Kx=ECDH     Au=RSA  Enc=AES(256)  Mac=SHA384
+ECDHE-ECDSA-AES256-SHA384 TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AES(256)  Mac=SHA384
+ECDHE-RSA-AES256-SHA    SSLv3 Kx=ECDH     Au=RSA  Enc=AES(256)  Mac=SHA1
+ECDHE-ECDSA-AES256-SHA  SSLv3 Kx=ECDH     Au=ECDSA Enc=AES(256)  Mac=SHA1
+```
+
+使い捨てハッシュで鍵交換
+
+公開鍵を使う
+
+アプリケーションでの暗号化は共通鍵
+
+MAC検証のハッシュ
