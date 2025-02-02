@@ -44,3 +44,14 @@ S/MIME（Secure/Multipurpose Internet Mail Extensions）
 
 こちらも電子メールのセキュリティを目的とした方式で、PCKS#7形式を用いてメッセージを非対称鍵暗号で暗号化し、その中に対称鍵を格納します。
 
+
+## CCMP
+CCMP(Counter Mode with Cipher Block Chaining Message  Authentication Code Protocol)は、Wi-Fi セキュリティにおけるAESベースの暗号化プロトコル。
+WPA2で標準的に採用され、高いデータ保護と改ざん防止機能を提供します。
+WPA2(Wi-Fi Protected Access II)およびWPA3のセキュリティ規格において、標準的な暗号化手段として採用されています。
+
+CCMPは、従来のTKIP(Temporal Key Integrity Protocol)に比べて、より強固なセキュリティを提供します。
+
+具体的には、CTR(Counter)モードを使用した暗号化と、CBC-MAC(Cipher Block Chaining Message  Authentication Code)を使用したメッセージ 認証を組み合わせることで、高速かつ安全なデータ通信を実現しています。
+
+この組み合わせにより、データの不正アクセスや改ざんを防ぎ、ネットワーク全体のセキュリティを向上させています。

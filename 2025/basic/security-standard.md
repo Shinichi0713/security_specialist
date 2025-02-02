@@ -31,4 +31,16 @@
 Payment Card Industry Data Security Standardの頭文字をとったもので、国際カードブランド5社(American Express、Discover、JCB、MasterCard、VISA)が共同で設立したPCI SSC(Payment Card Industry Security Standards Council)によって運用、管理されています。
 ```
 
+#### そのほか
 
+OECDプライバシー原則
+個人情報の保護に関する国際的なガイドライン。
+8つの原則より構成される
+1. 収集制限
+2. データ内容
+3. 目的明確化
+4. 利用制限
+5. 安全保護
+6. 公開
+7. 個人参加
+8. 責任
