@@ -23,8 +23,6 @@ TCPはトランスポート層のプロトコル。
 ゲートウェイはトランスポート層以上の中継を行う装置で、異なるネットワーク間の接続に用いられる。
 ちなみにUNIXやWindowsではルータのことをゲートウェイと呼ぶ。
 
-
-
 #### sftpコマンド
 
 sftpコマンドは、ftpコマンドのように対話的なファイル転送をするプログラムで、SSHで暗号化された通信経路でファイル転送を行います。
@@ -32,3 +30,9 @@ sftpコマンドは、ftpコマンドのように対話的なファイル転送�
 「[sshコマンド](https://webkaru.net/linux/ssh-command/)」と同じ認証を利用するので、鍵認証も利用でき、安全にファイル転送が行えます。
 
 鍵の生成は「[ssh-keygenコマンド](https://webkaru.net/linux/ssh-keygen-command/)」を参照してください。
+
+#### MPLS
+
+**MPLS (Multi-Protocol Label Switching)**は、様々な L2/L3 プロトコル (IPv4/IPv6/Ethernet/ATM/Frame-Relay 等) にラベルを取り付け、そのラベルに基づいてそのプロトコルを高速に転送するスイッチング方法です。
+
+MPLS によるデータ転送が可能になります。MPLS 網内で**ラベル (Label) を交換 (Switching) しながら**目的地に向かいます。
