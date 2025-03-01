@@ -197,7 +197,6 @@ int solve(int* arrayInput, int sizeArray, int rangeValid) {
 
 ソーシャルエンジニアリングを屈指して取引先や知人を装ったメールを送付して、マルウェア感染を起こす。
 
-
 #### セッションフィクセーション攻撃
 
 セッションフィクセーション攻撃は、ユーザーのログイン情報を悪用し、重要な個人情報を盗み出す非常に危険な手口です。
@@ -222,7 +221,6 @@ int solve(int* arrayInput, int sizeArray, int rangeValid) {
 
 セッションIDを生成する際は、推測や再現が困難なランダムな値を用いる必要があります。**暗号論的に安全な乱数生成器を使用し、十分な長さとエントロピーを確保しましょう。**
 
-
 #### URLエンコード
 
 %3d = "="
@@ -230,3 +228,12 @@ int solve(int* arrayInput, int sizeArray, int rangeValid) {
 %0d = "キャリッジリターン"
 
 %0a = "ラインフィールド"
+
+
+## DLLインジェクション
+
+**DLLインジェクション** ( *DLL Injection* ) とは、[アプリケーション](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3 "アプリケーション")の[DLL](https://ja.wikipedia.org/wiki/DLL "DLL")上のルーチンやリソースへ本来の処理とは異なる処理を行わせるために、DLLイメージを注入してDLL関数の呼び出しを横取り (インターセプト) する技法のこと。
+
+通常、アプリケーション (DLL) 開発者と別の者が、何らかの理由で、アプリケーション開発者の意図している処理を改変させる場合に用いられる。
+
+アプリケーションの動作環境を偽装する「実際には[Windows 7](https://ja.wikipedia.org/wiki/Windows_7 "Windows 7")上で動作しているが、アプリケーションからの問い合わせには『[Windows XP](https://ja.wikipedia.org/wiki/Windows_XP "Windows XP")で動作している』と偽装した応答を返す」など。多くの[オペレーティングシステム](https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0 "オペレーティングシステム")には稼働環境情報を提供するDLL内のサービス関数がある。そのサービス関数をフックして、本来とは異なる応答を返す処理ルーチンを実行させる。
