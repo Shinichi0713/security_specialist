@@ -297,5 +297,12 @@ HTTPリクエストを構成する部品の一つ
 
 ![1742457805838](image/communication/1742457805838.png)
 
-
 `POST /search.html HTTP/1.1\r\n Host: wa3.i-3-i.info\r\n Connection: keep-alive\r\n Content-Length: 38\r\n Cache-Control: max-age=0\r\n Origin: http://wa3.i-3-i.info\r\n Upgrade-Insecure-Requests: 1\r\n User-Agent: うんちゃら\r\n Content-Type: application/x-www-form-urlencoded\r\n Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\r\n Referer: http://wa3.i-3-i.info/index.html\r\n Accept-Encoding: gzip, deflate\r\n Accept-Language: ja,en-US;q=0.8,en;q=0.6\r\n \r\n q=test&submitSearch=%E6%A4%9C%E7%B4%A2`
+
+## フロントエンドとバックエンドとは
+
+フロントエンドは「見える部分」、バックエンドは「裏で動いている部分」
+
+フロントエンド：これはウェブサイトやアプリの画面部分。ユーザーが目にするボタンやデザイン、入力フォームなんかがここに含まれるよ。HTML、CSS、JavaScriptなどで作られてるんだ。
+
+バックエンド：こちらは「裏方さん」。ユーザーがデータを保存したり取り出したりするのを処理するサーバー側のシステムだよ。データベースとのやり取りやロジックを管理してるよ。PythonやPHP、Javaなんかがよく使われてる！
