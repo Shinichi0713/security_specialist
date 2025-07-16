@@ -454,4 +454,15 @@ __2. 時刻認証方式__
 TSAの時刻認証方式にはディジタル署名方式、アーカイビング方式、リンキング方式がある。
 ディジタル署名方式ではディジタル証明書を用いて、時刻認証。
 
+## subject フィールド
+ディジタル証明書（特にX.509証明書）の subject フィールドには、その証明書が発行された「主体」（エンドエンティティ、つまり証明書の所有者）の識別情報が記載されています。主に以下のような項目が含まれます。
+
+![alt text](image.png)
+
+- UID=jsmith,DC=example,DC=net
+- OU=Sales+CN=J. Smith,DC=example,DC=net
+- CN=James \"Jim\" Smith\, III,DC=example,DC=net
+- CN=Before\0dAfter,DC=example,DC=net
+
+
 
