@@ -309,11 +309,9 @@ HTTPリクエストを構成する部品の一つ
 
 ## Content-Security-Policy (CSP)
 
-
 **Content-Security-Policy (CSP)** は、Webサイトのセキュリティを高めるための  **HTTPレスポンスヘッダ** （または `<meta>`タグ）で、
 
 **ブラウザがどのリソースを読み込んで良いかを制御する仕組み** です。
-
 
 ### 背景
 
@@ -325,7 +323,6 @@ CSPは「どこからスクリプトや画像を読み込んで良いか」を�
 
 **不正スクリプトの実行を防止** します。
 
-
 ### ⚙ 主な機能
 
 1. **リソースの読み込み制御**
@@ -334,3 +331,81 @@ CSPは「どこからスクリプトや画像を読み込んで良いか」を�
    * 動的コード実行を防ぐ
 3. **違反の検知（レポート機能）**
    * 違反時に指定先にレポートを送信可能（CSP violation report）
+
+
+
+# SAMLアサーション
+
+**SAMLアサーション（SAML Assertion）** は、シングルサインオン（SSO）などで使われる **認証・属性情報をXML形式で記述したデータ** のことです。
+
+---
+
+## 🔹 背景
+
+* **SAML (Security Assertion Markup Language)** は、異なるドメイン間でユーザー認証情報をやり取りするための標準規格です。
+* 主に **IdP（Identity Provider：認証提供者）** と **SP（Service Provider：サービス提供者）** の間で使われます。
+  * IdP ＝ ログイン認証を担当する側（例: 社内認証基盤, Google, Oktaなど）
+  * SP ＝ 実際にユーザーが利用するサービス（例: Salesforce, Office365 など）
+
+---
+
+## 🔹 アサーションの役割
+
+SAMLアサーションは、IdP が SP に渡す「ユーザーに関する証明書」みたいなものです。
+
+主に以下の情報が入ります：
+
+1. **認証情報（Authentication Statement）**
+   * いつ・どの方法で認証されたか
+   * 例: 「このユーザーはパスワードで 10:05 に認証済み」
+2. **属性情報（Attribute Statement）**
+   * ユーザーに紐づく属性情報
+   * 例: ユーザーID, メールアドレス, 部署, 権限
+3. **認可情報（Authorization Decision Statement）**
+   * 特定のリソースにアクセスできるかどうか
+   * 例: 「このユーザーはレポート閲覧可」
+
+---
+
+## 🔹 アサーションの流れ（SSO例）
+
+1. ユーザーが SP（例: Salesforce）にアクセス
+2. SP は「まだログインされていない」と判断し、IdP（例: Okta）にリダイレクト
+3. ユーザーが IdP で認証される（ID/PW、MFAなど）
+4. IdP が  **SAMLアサーションを生成** （署名付きXML）
+5. アサーションをユーザー経由で SP に送信
+6. SP は署名を検証し、アサーションの内容から「ユーザーが正しく認証済み」と判断 → ログイン成功
+
+---
+
+## 🔹 アサーションのイメージ（XML）
+
+（簡略化した例）
+
+```xml
+<saml:Assertion>
+  <saml:Subject>
+    <saml:NameID>user@example.com</saml:NameID>
+  </saml:Subject>
+  <saml:AttributeStatement>
+    <saml:Attribute Name="role">admin</saml:Attribute>
+    <saml:Attribute Name="department">IT</saml:Attribute>
+  </saml:AttributeStatement>
+  <saml:AuthnStatement>
+    <saml:AuthnInstant>2025-09-15T10:05:00Z</saml:AuthnInstant>
+    <saml:AuthnContext>password</saml:AuthnContext>
+  </saml:AuthnStatement>
+</saml:Assertion>
+```
+
+---
+
+## ✅ まとめ
+
+* **SAMLアサーション** = IdP が発行する **XML形式の認証・属性情報の証明書**
+* SP はそれを検証して「このユーザーは誰か？」「どんな権限か？」を判断
+* 主に SSO の基盤技術として使われる
+
+---
+
+👉 続けて「SAMLアサーションとJWT（JSON Web Token）の違い」についても比較してみますか？
