@@ -28,3 +28,4 @@ fn main() {
     let empty_string_vec: Vec<&str> = create_vec!(); 
     println!("Empty Vec (str): {:?}", empty_string_vec);
 }
+
