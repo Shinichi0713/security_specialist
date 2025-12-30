@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x958b;&#x767a;&#x306e;&#x80cc;&#x666f;&#xff1a;&#x306a;&#x305c; Rust &#x304c;&#x5fc5;&#x8981;&#x3060;&#x3063;&#x305f;&#x306e;&#x304b;&#xff1f;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+/* 目次全体のコンテナ */
+nav {
+    background-color: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0 40px 0;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* 「目次」というタイトル */
+nav h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #0969da;
+    color: #24292f;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+/* タイトルの前にアイコン（絵文字）を追加 */
+nav h3::before {
+    content: "📖";
+    margin-right: 8px;
+}
+
+/* リストのスタイル調整 */
+#toc {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#toc li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* リンクのスタイル */
+#toc a {
+    color: #0969da;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+#toc a:hover {
+    color: #cf222e;
+    transform: translateX(5px); /* ホバー時に少し右に動く */
+}
+
+/* h3（小見出し）がある場合のネスト表現（JSの修正も必要） */
+.toc-h3 {
+    padding-left: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+
+<nav>
+        <h3>目次</h3>
+        <ul id="toc"></ul> 
+</nav>
+
+
+            <p>著者が最近ぼちぼち勉強しているRustについて開発背景から特徴などについてつらつらとまとめていきます。</p>
+<h2 id="開発の背景なぜ-rust-が必要だったのか">開発の背景：なぜ Rust が必要だったのか？</h2>
+<p>Rustは、2006年にMozilla（Firefoxを開発している団体）のエンジニア <strong>Graydon Hoare</strong> が個人プロジェクトとして始めました。</p>
+<h3 id="1-ソフトウェアの脆弱性の解消">1. ソフトウェアの脆弱性の解消</h3>
+<p>GoogleやMicrosoftの報告によると、ソフトウェアのセキュリティ脆弱性の <strong>約70%</strong> は、メモリの管理ミス（メモリ安全性の問題）が原因です。C言語やC++などの低レイヤ言語では、人間が手動でメモリを管理するため、どうしてもミスを防ぎきれませんでした。</p>
+<h3 id="2-安全だが遅いか速いが危険か">2. 「安全だが遅い」か「速いが危険」か</h3>
+<p>これまでの言語選びは、究極の二択でした。</p>
+<ul>
+<li><strong>Java, Python, Go:</strong> ガベージコレクション（GC）が自動でメモリを掃除してくれるので<strong>安全</strong>だが、実行速度や予測可能性に欠ける。</li>
+<li><strong>C, C++:</strong> メモリを直接操れるので<strong>高速</strong>だが、一歩間違えるとプログラムがクラッシュしたり、サイバー攻撃の隙を作ったりする。</li>
+</ul>
+<p><strong>「GCを使わずに、コンパイル時にメモリの安全性を100%保証する」</strong> という野心的な目標を掲げて生まれたのがRustです。</p>
+<h2 id="rust-の主な特徴">Rust の主な特徴</h2>
+<p>Rustを一言で表すと、 <strong>「コンパイラが非常に厳格な、究極の堅牢言語」</strong> です。</p>
+<h3 id="1-所有権-ownership-システム最大の特徴">1. 所有権 (Ownership) システム（最大の特徴）</h3>
+<p>Rustは「所有権」「借用」「ライフタイム」という独自のルールを採用しています。</p>
+<ul>
+<li><strong>GCがいらない:</strong> メモリを誰が所有しているかをコンパイラが把握し、不要になった瞬間に自動で解放するコードを挿入します。</li>
+<li><strong>ダングリングポインタの防止:</strong> すでに解放されたメモリにアクセスするようなコードは、コンパイル時にエラーになります。</li>
+</ul>
+<h3 id="2-並行処理の安全性-fearless-concurrency">2. 並行処理の安全性 (Fearless Concurrency)</h3>
+<p>マルチスレッドプログラミングで発生しやすい「データレース（複数のスレッドが同時にデータを書き換えて壊す現象）」を、コンパイル時に防ぎます。これにより、「恐れ知らずの並行処理」が可能になります。</p>
+<h3 id="3-モダンなツールチェーン">3. モダンなツールチェーン</h3>
+<p>古い言語にありがちな「環境構築やライブラリ管理が大変」という問題が解消されています。</p>
+<ul>
+<li><strong>Cargo:</strong> Rustの標準パッケージマネージャ。ビルド、テスト、ライブラリ導入（クレート）をこれ一つで行えます。</li>
+<li><strong>親切なエラーメッセージ:</strong> コンパイラが「どこが悪いか」だけでなく「どう直すべきか」を非常に丁寧に教えてくれます。</li>
+</ul>
+<h3 id="4-ゼロコスト抽象化">4. ゼロコスト抽象化</h3>
+<p>高機能な構文や抽象的な書き方をしても、実行時のオーバーヘッド（無駄な負荷）が発生しません。書いたコードは、C++と同等か、場合によってはそれ以上の速度で動作するマシン語に変換されます。</p>
+<h2 id="rust-の主要な応用分野">Rust の主要な応用分野</h2>
+<p>Rustはその高いパフォーマンスと安全性から、従来のシステムプログラミングの枠を超えて、現代のあらゆる技術領域に浸透しています。</p>
+<p>主要な応用分野と、そこでRustが選ばれる理由をリストアップしました。</p>
+<h3 id="1-web開発バックエンド">1. Web開発（バックエンド）</h3>
+<p>GoやNode.jsに代わる、高負荷に耐えうるサーバーサイド言語として注目されています。</p>
+<ul>
+<li><strong>主な理由:</strong> 並行処理に強く、大量のリクエストを低メモリ消費で高速にさばけるため。</li>
+<li><strong>代表的なフレームワーク:</strong> Actix-web, Axum</li>
+<li><strong>事例:</strong> Discord（読み込み速度向上のためGoから移行）、Cloudflare</li>
+</ul>
+<h3 id="2-webassembly-wasm">2. WebAssembly (Wasm)</h3>
+<p>ブラウザ上でJavaScriptよりも高速な処理を動かすための技術です。</p>
+<ul>
+<li><strong>主な理由:</strong> ランタイム（実行エンジン）が不要でバイナリサイズが小さく、計算の重い処理（画像・動画編集、ゲーム）をウェブブラウザ上でネイティブに近い速度で実行できるため。</li>
+<li><strong>事例:</strong> Figma（デザインツールの動作高速化）、Adobe Photoshop Web版</li>
+</ul>
+<h3 id="3-システムos開発">3. システム・OS開発</h3>
+<p>OSの核となるカーネルやドライバなど、最もハードウェアに近い部分です。</p>
+<ul>
+<li><strong>主な理由:</strong> C/C++と同等の速度を持ちながら、メモリ安全性が保証されているため（「青い画面」や「セグメンテーション違反」の激減）。</li>
+<li><strong>事例:</strong> Linuxカーネル（C言語以外で初めて公式採用）、Android、Windows OSのコアコンポーネント</li>
+</ul>
+<h3 id="4-インフラクラウドツール">4. インフラ・クラウドツール</h3>
+<p>クラウド環境で動く「土台」となるソフトウェアです。</p>
+<ul>
+<li><strong>主な理由:</strong> 実行速度の速さとリソース消費の少なさが、直接的に「サーバー代の削減」につながるため。</li>
+<li><strong>事例:</strong> AWS Firecracker（サーバーレスAWS Lambdaの実行基盤）、Docker関連ツール</li>
+</ul>
+<h3 id="5-ブロックチェーン暗号資産">5. ブロックチェーン・暗号資産</h3>
+<p>高いセキュリティと改ざん耐性が求められる分野です。</p>
+<ul>
+<li><strong>主な理由:</strong> メモリバグやデータレースが致命的な資産流出につながるため、言語レベルで安全性が担保されるRustが非常に好まれます。</li>
+<li><strong>事例:</strong> Solana, Polkadot, Near Protocol</li>
+</ul>
+<h3 id="6-組み込みシステムiot">6. 組み込みシステム・IoT</h3>
+<p>家電やセンサーなど、リソース（メモリやCPU）が限られた環境です。</p>
+<ul>
+<li><strong>主な理由:</strong> ガベージコレクション（GC）がないため、極限まで少ないメモリでも動作し、かつ動作の遅延（GCによる一時停止）が発生しないため。</li>
+</ul>
+<h3 id="rust-が利用されている具体的なアプリ">Rust が利用されている具体的なアプリ</h3>
+<p>現在、Rustはその信頼性の高さから、名だたる企業で採用されています。</p>
+<table>
+<thead>
+<tr>
+<th>採用先</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Linux カーネル</strong></td>
+<td>C言語以外で初めて、OSの核心部の開発言語として採用。</td>
+</tr>
+<tr>
+<td><strong>AWS / Google</strong></td>
+<td>インフラの基盤システムやクラウドサービスの高速化。</td>
+</tr>
+<tr>
+<td><strong>Discord</strong></td>
+<td>Go言語からRustに移行し、システムの大幅な高速化を実現。</td>
+</tr>
+<tr>
+<td><strong>WebAssembly</strong></td>
+<td>ブラウザ上で高速なプログラムを動かすための主要言語。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="なぜこれらの分野で-rust-が選ばれるのか共通の理由">なぜこれらの分野で Rust が選ばれるのか？（共通の理由）</h3>
+<p>一言で言えば、 <strong>「コストとリスクの劇的な低減」</strong> です。</p>
+<ol>
+<li><strong>バグ修正コストの削減:</strong><br>
+C++などの言語では、本番環境でしか起きない「時々発生する原因不明のクラッシュ」に数週間悩まされることがあります。Rustはそれをコンパイル時に見つけてくれるため、開発の後半でかかるコストを大幅に減らせます。</li>
+<li><strong>インフラ費用の削減:</strong><br>
+PythonやJavaに比べて圧倒的に少ないメモリとCPUで同等の処理ができるため、クラウドサーバーの台数を減らすことができ、ビジネス上のメリットが非常に大きいです。</li>
+<li><strong>セキュリティの向上:</strong><br>
+メモリ脆弱性を突いたサイバー攻撃に対して、言語の仕組み自体が防御壁となるため、現代の「堅牢なシステム」に不可欠な要素となっています。</li>
+</ol>
+<h2 id="rust-の今後の主な展望">Rust の今後の主な展望</h2>
+<p>Rustの今後の展望は、単なる「人気のある新しい言語」という枠を超え、**「社会のインフラを支える標準言語」**としての地位を固めるフェーズに入っています。</p>
+<p>2024年〜2025年現在の動向と、2026年以降のロードマップに基づいた主な展望は以下の通りです。</p>
+<h3 id="1-学習の難しさ学習曲線の緩和">1. 「学習の難しさ（学習曲線）」の緩和</h3>
+<p>Rustの最大の壁と言われる「所有権」や「借用」の概念を、より直感的に書けるようにする取り組みが進んでいます。</p>
+<ul>
+<li><strong>Rust 2024 Edition:</strong> 2025年初頭に正式リリースされた「Rust 2024」エディションでは、非同期処理（Async）の改善や、より精密な借用チェッカー（Polonius）の導入により、「コンパイラに怒られる回数」を減らし、開発者が本質的なロジックに集中できる環境が整いつつあります。</li>
+</ul>
+<h3 id="2-非同期処理-async-の円滑化">2. 非同期処理 (Async) の円滑化</h3>
+<p>これまでRustの非同期処理は、トレイト（共通の振る舞い）との相性が悪いなど、高度な知識を必要とする部分がありました。</p>
+<ul>
+<li><strong>展望:</strong> 「Async fn in traits」などの機能が安定化し、ウェブサーバーやネットワークツールの開発が、他言語（GoやNode.js）に匹敵する書きやすさに進化しています。</li>
+</ul>
+<h3 id="3-ビッグテックによる脱ccの加速">3. ビッグテックによる「脱C/C++」の加速</h3>
+<p>Amazon, Google, Microsoft などの巨頭が、既存のC++コードをRustへ書き換える動きを強めています。</p>
+<ul>
+<li><strong>展望:</strong> セキュリティ脆弱性の根本原因であるメモリバグを排除するため、OSのコア（LinuxやWindows、Android）や、クラウド基盤の低レイヤ部分でのRust採用がデファクトスタンダード（事実上の標準）になると予想されます。</li>
+</ul>
+<h3 id="4-コンパイル速度の向上">4. コンパイル速度の向上</h3>
+<p>Rustの欠点として挙げられる「コンパイルの遅さ」についても、並列型チェックの導入やフロントエンド（rustc）の最適化により、2025年以降、大規模なプロジェクトでも30%程度の高速化が見込まれています。</p>
+
+<script>
+const toc = document.getElementById('toc');
+// h2 と h3 の両方を取得
+const headings = document.querySelectorAll('h2, h3');
+
+headings.forEach((heading, i) => {
+    if (!heading.id) heading.id = `heading-${i}`;
+    
+    const li = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${heading.id}`;
+    link.textContent = heading.textContent;
+    
+    // h3 の場合はクラスを付与して字下げする
+    if (heading.tagName === 'H3') {
+        li.classList.add('toc-h3');
+    }
+    
+    li.appendChild(link);
+    toc.appendChild(li);
+});
+
+// スムーズスクロールを有効にする
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+            
+            
+        </body>
+        </html>
