@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x57fa;&#x672c;&#x7684;&#x306a;&#x624b;&#x9806;&#xff08;Cargo&#x30d7;&#x30ed;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x306e;&#x5834;&#x5408;&#xff09;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+/* 目次全体のコンテナ */
+nav {
+    background-color: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0 40px 0;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* 「目次」というタイトル */
+nav h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #0969da;
+    color: #24292f;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+/* タイトルの前にアイコン（絵文字）を追加 */
+nav h3::before {
+    content: "📖";
+    margin-right: 8px;
+}
+
+/* リストのスタイル調整 */
+#toc {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#toc li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* リンクのスタイル */
+#toc a {
+    color: #0969da;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+#toc a:hover {
+    color: #cf222e;
+    transform: translateX(5px); /* ホバー時に少し右に動く */
+}
+
+/* h3（小見出し）がある場合のネスト表現（JSの修正も必要） */
+.toc-h3 {
+    padding-left: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+
+          
+<nav>
+        <h3>目次</h3>
+        <ul id="toc"></ul> 
+</nav>
+          
+            <p>Rustの勉強していて、練習程度ならば、一つのファイルで文法チェックしてればよかったのですが、少し機能を持たせる成果物を作りたいとなってきて、ファイルを分割したくなってきました。
+なので、他ファイルの参照の仕組みをようやく使うときが来ました。</p>
+<p>Rustで別のファイルにある関数を読み込むには、 <strong>「モジュール（module）」</strong> という仕組みを使います。</p>
+<p>他の言語（Pythonの<code>import</code>やC++の<code>#include</code>）と少し感覚が異なり、 <strong>「ファイル構造＝モジュール構造」</strong> としてRustに教えてあげる必要があります。</p>
+<h2 id="基本的な手順cargoプロジェクトの場合">基本的な手順（Cargoプロジェクトの場合）</h2>
+<p>例えば、<code>main.rs</code> から <code>utils.rs</code> にある関数を呼び出す手順を説明します。</p>
+<p>ファイルはこんな感じで配置するとします。</p>
+<pre><code class="language-text">my_project/
+├── Cargo.toml
+└── src/
+    ├── main.rs   &lt;-- (親) ここで mod utils; を宣言
+    └── utils.rs  &lt;-- (子) 実際の処理を書く。関数には pub をつける
+
+</code></pre>
+<h3 id="1-呼び出される側のファイル-srcutilsrs">1. 呼び出される側のファイル (<code>src/utils.rs</code>)</h3>
+<p>関数を他のファイルから見えるようにするために、<strong><code>pub</code></strong> キーワードを付けます。</p>
+<pre><code class="language-rust"><span class="hljs-comment">// src/utils.rs</span>
+
+<span class="hljs-comment">// pub を付けることで外部（他のファイル）からアクセス可能になる</span>
+<span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">hello_from_utils</span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;utils.rsの関数が呼ばれました！&quot;</span>);
+}
+
+</code></pre>
+<h3 id="呼び出す側のファイル-srcmainrs">呼び出す側のファイル (<code>src/main.rs</code>)</h3>
+<p><code>main.rs</code> で「<code>utils.rs</code> というファイルが存在し、それをモジュールとして使う」ことを宣言します。</p>
+<pre><code class="language-rust"><span class="hljs-comment">// src/main.rs</span>
+
+<span class="hljs-comment">// 1. utils.rs をモジュールとして登録（ファイル名がモジュール名になる）</span>
+<span class="hljs-keyword">mod</span> utils;
+
+<span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() {
+    <span class="hljs-comment">// 2. 「モジュール名::関数名」で呼び出す</span>
+    utils::<span class="hljs-title function_ invoke__">hello_from_utils</span>();
+}
+
+</code></pre>
+<h2 id="フォルダ構成のイメージ">フォルダ構成のイメージ</h2>
+<p>Cargoプロジェクトでは、ファイルは必ず <code>src</code> フォルダの中に置く必要があります。</p>
+<h2 id="知っておくと便利な応用">知っておくと便利な応用</h2>
+<h3 id="use-を使って短縮する"><code>use</code> を使って短縮する</h3>
+<p>毎回 <code>utils::</code> と書くのが面倒な場合は、<code>use</code> を使うと直接関数名だけで呼べるようになります。</p>
+<pre><code class="language-rust"><span class="hljs-keyword">mod</span> utils;
+<span class="hljs-keyword">use</span> utils::hello_from_utils; <span class="hljs-comment">// これを足すと...</span>
+
+<span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() {
+    <span class="hljs-title function_ invoke__">hello_from_utils</span>(); <span class="hljs-comment">// 直接呼べる！</span>
+}
+
+</code></pre>
+<h3 id="フォルダで管理する場合">フォルダで管理する場合</h3>
+<p>ファイルが増えて、<code>src/tools/network.rs</code> のようにフォルダ分けしたい場合は、少し特殊なルール（<code>mod.rs</code> を置くか、フォルダ名と同じ名前の <code>.rs</code> ファイルを作る）が必要になります。</p>
+<ol>
+<li><code>src/tools.rs</code> を作成し、その中で <code>pub mod network;</code> と宣言する。</li>
+<li><code>src/tools/network.rs</code> に関数を書く。</li>
+<li><code>main.rs</code> で <code>mod tools;</code> と宣言する。</li>
+</ol>
+<h3 id="トラブルシューティングmod-を書く場所">トラブルシューティング：<code>mod</code> を書く場所</h3>
+<p>よくある間違いは、 <strong><code>utils.rs</code> の中にも <code>mod utils;</code> と書いてしまうこと</strong> です。</p>
+<ul>
+<li><strong><code>mod</code> 宣言</strong>は、そのファイルを「子」として持つ「親」のファイル（今回なら <code>main.rs</code>）に一度だけ書きます。</li>
+</ul>
+
+
+<script>
+const toc = document.getElementById('toc');
+// h2 と h3 の両方を取得
+const headings = document.querySelectorAll('h2, h3');
+
+headings.forEach((heading, i) => {
+    if (!heading.id) heading.id = `heading-${i}`;
+    
+    const li = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${heading.id}`;
+    link.textContent = heading.textContent;
+    
+    // h3 の場合はクラスを付与して字下げする
+    if (heading.tagName === 'H3') {
+        li.classList.add('toc-h3');
+    }
+    
+    li.appendChild(link);
+    toc.appendChild(li);
+});
+
+// スムーズスクロールを有効にする
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+            
+            
+        </body>
+        </html>
