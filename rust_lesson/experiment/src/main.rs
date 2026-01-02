@@ -1,13 +1,18 @@
-use rand::Rng;
 
 mod utils;
+mod controle;
+
+fn control(){
+    utils::hello_from_utils();
+    // controle::answer_number_loop();
+    let count = controle::count_loop();
+    println!("Count result: {}", count);
+
+    controle::fizz_buzz_loop();
+}
+
 
 fn main() {
-    let mut rng = rand::thread_rng();
-    let x = rng.gen_range(0.0..1.0);
-
-    println!("random = {}", x);
-
-    utils::hello_from_utils();
+    control();
 }
 
