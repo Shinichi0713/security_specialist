@@ -31,6 +31,13 @@ fn example_structure(){
 
     player1.take_damage(80);
     player1.display_status();
+
+    use structure::Book;
+    let mut book1 = Book::new("吾輩は猫である", "夏目漱石", 300);
+    book1.borrow_book();
+    book1.display_info();
+    book1.return_book();
+    book1.display_info();
 }
 
 fn main() {
