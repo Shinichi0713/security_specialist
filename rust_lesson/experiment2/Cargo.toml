@@ -1,0 +1,10 @@
+[package]
+name = "experiment2"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+scraper = "0.17"
+tokio = { version = "1", features = ["full"] }
+futures = "0.3" # 並行処理の制御用
