@@ -6,3 +6,5 @@ edition = "2024"
 [dependencies]
 rand = "0.8"
 
+[target.x86_64-pc-windows-msvc]
+linker = "rust-lld.exe"

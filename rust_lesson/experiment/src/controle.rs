@@ -69,3 +69,22 @@ pub fn fizz_buzz_loop() {
 }
 
 
+pub fn summation_for() -> f32{
+    let mut sum = 0.0;
+    let grades = [80, 95, 70, 100, 65];
+    for grade in grades.iter() {
+        sum += *grade as f32;
+    }
+
+    sum
+}
+
+pub fn find_index_for(element: String) -> i32{
+    let fruits = ["apple", "banana", "cherry", "date"];
+    for content in fruits.iter(){
+        if *content == element {
+            return fruits.iter().position(|&x| x == *content).unwrap() as i32;
+        }
+    }
+    -1
+}
