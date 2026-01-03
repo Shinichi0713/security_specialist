@@ -59,6 +59,58 @@ nav h3::before {
     font-size: 0.9em;
     opacity: 0.8;
 }
+/* 記事全体のベース（必要に応じて調整） */
+article, .content {
+    line-height: 1.8;
+    color: #333;
+}
+
+/* H1: 記事の主タイトル */
+h1 {
+    padding: 0.5em 0;
+    margin-bottom: 1em;
+    border-bottom: 3px solid #6c5ce7; /* 下線でアクセント */
+    color: #2d3436;
+    font-size: 1.8em;
+}
+
+/* H2: 大見出し（背景色あり） */
+h2 {
+    position: relative;
+    padding: 0.6em 1em;
+    margin: 2em 0 1em;
+    background-color: #f1f2f6; /* 薄いグレーの背景 */
+    border-left: 6px solid #6c5ce7; /* 左側に濃い色のアクセント線 */
+    border-radius: 0 4px 4px 0;
+    color: #2d3436;
+    font-size: 1.5em;
+}
+
+/* H3: 中見出し（下線デザイン） */
+h3 {
+    padding: 0.4em 0.5em;
+    margin: 1.5em 0 0.8em;
+    border-bottom: 2px solid #dfe4ea; /* 薄い下線 */
+    color: #4b4b4b;
+    font-size: 1.25em;
+}
+
+/* 目次（TOC）内の h3 の字下げ設定 */
+.toc-h3 {
+    margin-left: 1.5em;
+    font-size: 0.9em;
+    list-style-type: circle; /* 子要素っぽく白丸にする */
+}
+
+/* 目次全体のスタイル（おまけ） */
+#toc {
+    background: #ffffff;
+    border: 1px solid #dfe4ea;
+    padding: 1.5em;
+    border-radius: 8px;
+    margin-bottom: 2em;
+}
+
 
 
 <nav>
