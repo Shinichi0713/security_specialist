@@ -59,58 +59,69 @@ nav h3::before {
     font-size: 0.9em;
     opacity: 0.8;
 }
-/* 記事全体のベース（必要に応じて調整） */
-article, .content {
-    line-height: 1.8;
-    color: #333;
-}
 
-/* H1: 記事の主タイトル */
+
+/* 記事タイトル (h1) */
 h1 {
-    padding: 0.5em 0;
-    margin-bottom: 1em;
-    border-bottom: 3px solid #6c5ce7; /* 下線でアクセント */
-    color: #2d3436;
-    font-size: 1.8em;
+    font-size: 2rem;
+    color: #24292f;
+    line-height: 1.3;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 3px double #e1e4e8; /* 二重線で上品に */
+    text-align: center; /* タイトルを中央に寄せて特別感を出す */
 }
 
-/* H2: 大見出し（背景色あり） */
+/* セクション見出し (h2) */
 h2 {
+    font-size: 1.5rem;
+    color: #24292f;
+    padding: 0.5rem 1rem;
+    margin: 40px 0 20px 0;
+    background: linear-gradient(transparent 70%, #e8f0fe 70%); /* 下側に薄い色のアクセント */
+    border-left: 6px solid #0969da; /* 目次のテーマカラーと合わせる */
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+}
+
+/* 強調文字 (strong) */
+strong {
+    font-weight: bold;
+    color: #cf222e; /* ホバー時の赤色と合わせて統一感を出す */
+    background: linear-gradient(transparent 60%, #fff2cc 60%); /* 黄色のマーカー風 */
+    padding: 0 2px;
+}
+
+/* 引用のコンテナ */
+blockquote {
     position: relative;
-    padding: 0.6em 1em;
-    margin: 2em 0 1em;
-    background-color: #f1f2f6; /* 薄いグレーの背景 */
-    border-left: 6px solid #6c5ce7; /* 左側に濃い色のアクセント線 */
-    border-radius: 0 4px 4px 0;
-    color: #2d3436;
-    font-size: 1.5em;
+    padding: 20px 30px;
+    margin: 30px 0;
+    background-color: #f6f8fa; /* 目次の背景より少しだけ濃いグレー */
+    border-left: 5px solid #d0d7de; /* 落ち着いたグレーの境界線 */
+    color: #57606a; /* 文字色は少し薄くして引用らしさを出す */
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
 }
 
-/* H3: 中見出し（下線デザイン） */
-h3 {
-    padding: 0.4em 0.5em;
-    margin: 1.5em 0 0.8em;
-    border-bottom: 2px solid #dfe4ea; /* 薄い下線 */
-    color: #4b4b4b;
-    font-size: 1.25em;
+/* 引用符のアイコンを装飾として追加 */
+blockquote::before {
+    content: "“";
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    font-size: 40px;
+    color: #d0d7de;
+    font-family: serif;
+    line-height: 1;
 }
 
-/* 目次（TOC）内の h3 の字下げ設定 */
-.toc-h3 {
-    margin-left: 1.5em;
-    font-size: 0.9em;
-    list-style-type: circle; /* 子要素っぽく白丸にする */
+/* 引用内の最後の要素（出典元など）の余白調整 */
+blockquote p {
+    margin: 0;
+    line-height: 1.6;
 }
-
-/* 目次全体のスタイル（おまけ） */
-#toc {
-    background: #ffffff;
-    border: 1px solid #dfe4ea;
-    padding: 1.5em;
-    border-radius: 8px;
-    margin-bottom: 2em;
-}
-
 
 
 <nav>

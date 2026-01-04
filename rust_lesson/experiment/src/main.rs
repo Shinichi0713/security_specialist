@@ -2,6 +2,7 @@
 mod utils;
 mod controle;
 mod structure;
+mod m_enum;
 
 fn control(){
     utils::hello_from_utils();
@@ -38,6 +39,9 @@ fn example_structure(){
     book1.display_info();
     book1.return_book();
     book1.display_info();
+
+    use m_enum::exe_enum;
+    exe_enum();
 }
 
 fn main() {
