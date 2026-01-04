@@ -42,6 +42,11 @@ fn example_structure(){
 
     use m_enum::exe_enum;
     exe_enum();
+
+    use m_enum::Point;
+    let point1 = Point::new(3.0, 4.0);
+    let distance = point1.distance_from_origin();
+    println!("Point from origin: {}", distance);
 }
 
 fn main() {
