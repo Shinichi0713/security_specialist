@@ -1,8 +1,3 @@
-### 実践コーディング課題：配送管理システム
-
-実際に以下のコードをエディタ（VSCode等）に貼り付けて、指示に従って完成させてみてください。
-
-```rust
 // 1. 列挙型の定義を完成させてください
 enum OrderStatus {
     Pending,
@@ -12,7 +7,7 @@ enum OrderStatus {
 
 impl OrderStatus {
     // 2. メソッドを実装してください
-    fn print_info(&self) {
+    pub fn print_info(&self) {
         // ここに match 式を書いて、状態ごとに異なるメッセージを出力してください
         // Pending -> "準備中です"
         // Shipped -> "発送済み。追跡番号: [番号]"
@@ -25,16 +20,12 @@ impl OrderStatus {
     }
 }
 
-fn main() {
-    let status1 = OrderStatus::Pending;
-    let status2 = OrderStatus::Shipped(String::from("ABC-12345"));
-  
+pub fn exe_enum() {
+    let status1 = OrderStatus::Shipped(String::from("12345ABC"));
+    let status2 = OrderStatus::Cancelled(String::from("在庫切れ"));
+    let status3 = OrderStatus::Pending;
+    
     status1.print_info();
     status2.print_info();
+    status3.print_info();
 }
-
-```
-
-構造体（struct）が「情報の静的な塊」であるのに対し、列挙型（enum）は「動的な状態の変化」を表現するのに最適です。
-
-ぜひ実際に手を動かして、`match` 式の便利さを体感してみてください！応援しています。
