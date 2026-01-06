@@ -70,3 +70,43 @@ pub fn exe_generics() {
     let p2 = Point::new(3.0, 4.0);
     println!("p2 distance: {}", p2.distance_from_origin());
 }
+
+
+// 1. ジェネリックな構造体 Expired を定義してください
+pub struct Expired<T> {
+    data: T,
+    id: u32,
+}
+
+impl<T> Expired<T> {
+    // 2. new メソッドを実装してください
+    fn new(id: u32, data: T) -> Self {
+        // ここに記述
+        Expired { data, id }
+    }
+
+    // 3. データの参照を返すメソッド
+    fn get_data(&self) -> &T {
+        // ここに記述
+        &self.data
+    }
+
+    // 4. データを入れ替えて古いデータを返すメソッド
+    fn replace_data(&mut self, new_data: T) -> T {
+        // ヒント: std::mem::replace を使うか、一時変数に退避させます
+        std::mem::replace(&mut self.data, new_data)
+    }
+}
+
+pub fn exe_expired() {
+    // ケース1: String型を包む
+    let mut secret = Expired::new(1, String::from("旧パスワード"));
+    println!("現在のデータ: {}", secret.get_data());
+
+    let old_data = secret.replace_data(String::from("新パスワード"));
+    println!("入れ替え完了。古いデータ: '{}' を破棄しました。", old_data);
+
+    // ケース2: 数値(i32)を包む
+    let price = Expired::new(100, 5000);
+    println!("商品ID: {}, 価格: {}", price.id, price.get_data());
+}
