@@ -110,3 +110,47 @@ pub fn exe_expired() {
     let price = Expired::new(100, 5000);
     println!("商品ID: {}, 価格: {}", price.id, price.get_data());
 }
+
+
+// 1. 構造体の定義
+pub struct MyStack<T> {
+    items: Vec<T>,
+}
+
+// 2. ジェネリックなメソッドの実装
+impl<T> MyStack<T> {
+    // 新しいスタックを作成
+    fn new() -> Self {
+        MyStack { items: Vec::new() }
+    }
+
+    // データを追加
+    fn push(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    // データを取り出す（一番上の値を削除して返す）
+    fn pop(&mut self) -> Option<T> {
+        self.items.pop()
+    }
+
+    // 一番上の値を覗き見する（削除しない）
+    fn peek(&self) -> Option<&T> {
+        self.items.last()
+    }
+}
+
+pub fn exec_generics() {
+    // 数値型のスタックとして利用
+    let mut int_stack = MyStack::new();
+    int_stack.push(10);
+    int_stack.push(20);
+    println!("Peek int: {:?}", int_stack.peek()); // Some(20)
+    println!("Pop int: {:?}", int_stack.pop());   // Some(20)
+
+    // 文字列型のスタックとして利用
+    let mut str_stack = MyStack::new();
+    str_stack.push(String::from("Rust"));
+    str_stack.push(String::from("Generics"));
+    println!("Peek str: {:?}", str_stack.peek()); // Some("Generics")
+}
