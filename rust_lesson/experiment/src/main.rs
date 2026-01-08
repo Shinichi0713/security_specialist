@@ -50,6 +50,9 @@ fn example_structure(){
 
     use m_enum::exe_generics;
     exe_generics();
+
+    use m_enum::exec_generics;
+    exec_generics();
 }
 
 fn main() {
