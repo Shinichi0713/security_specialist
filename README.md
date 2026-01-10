@@ -1,12 +1,16 @@
-# Network Technics
-## Nwtwork Specialist
+# [Network Technics](https://github.com/Shinichi0713/NetworkTechnics)
 
+## Newtwork Specialist
+
+### 目的
+
+ネットワークスペシャリストを目指すためのノウハウをつける。
 
 ## Security Specialist
 
 ### 目的
 
-情報安全支援士勉強を効率化するためのgitレポジトリ `<br>`
+情報安全支援士勉強を効率化するためのgitレポジトリ。
 
 合格しました。
 
@@ -62,3 +66,13 @@ https://www.ipa.go.jp/shiken/2025/r07haru_exam.html
 #### 午後問題解説
 
 [情報処理安全確保支援士への道(1)：令和７年 春 午後問題 問1を解いてみる(設問1(1)～(2)編)｜ルチルMike](https://note.com/huge_boar6554/n/nd098ec10d634)
+
+## Rustの研究
+
+Rustのスキルを付けて、Rustを使ったツールを作る。
+スキル取得のためのコツをまとめる。
+
+[Rust研究](https://github.com/Shinichi0713/NetworkTechnics/tree/main/rust_lesson)
+
+<img src="image/README/1767854562526.png" width=500 style="display: block; margin: 0 auto;">
+

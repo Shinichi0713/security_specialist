@@ -1,0 +1,7 @@
+plugins:
+  - jekyll-sitemap
+title: My GitHub Page
+theme: minima
+markdown: kramdown
+include:
+  - _includes/head.html
