@@ -1,3 +1,5 @@
+use std::fmt::Debug; // ファイルの先頭に追加
+
 // 1. 列挙型の定義を完成させてください
 enum OrderStatus {
     Pending,
@@ -154,3 +156,23 @@ pub fn exec_generics() {
     str_stack.push(String::from("Generics"));
     println!("Peek str: {:?}", str_stack.peek()); // Some("Generics")
 }
+
+pub struct Point2<T>{
+    x: T,
+    y: T,
+}
+
+impl<T: Debug> Point2<T> {
+    pub fn new(x: T, y: T) -> Self {
+        Point2 { x, y }
+    }
+
+    pub fn swap_xy(self) -> Point2<T> {
+        Point2 { x: self.y, y: self.x }
+    }
+
+    pub fn show(&self) {
+        println!("Point2: x={:?}, y={:?}", self.x, self.y);
+    }
+}
+

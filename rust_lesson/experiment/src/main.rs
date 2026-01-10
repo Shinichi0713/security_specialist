@@ -53,6 +53,10 @@ fn example_structure(){
 
     use m_enum::exec_generics;
     exec_generics();
+
+    use m_enum::Point2;
+    let p_int = Point2::new(5, 10);
+    p_int.show();
 }
 
 fn main() {
