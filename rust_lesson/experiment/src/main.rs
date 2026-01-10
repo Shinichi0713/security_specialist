@@ -3,6 +3,7 @@ mod utils;
 mod controle;
 mod structure;
 mod m_enum;
+mod expressions;
 
 fn control(){
     utils::hello_from_utils();
@@ -59,7 +60,20 @@ fn example_structure(){
     p_int.show();
 }
 
+fn example_expressions(){
+    use expressions::exec_match;
+    exec_match();
+
+    use expressions::exec_match2;
+    exec_match2();
+
+    use expressions::{Coin, value_in_cents};
+    let ans = value_in_cents(Coin::Penny);
+    println!("gotten ans = {}", ans);
+}
+
 fn main() {
-    example_structure();
+    // example_structure();
+    example_expressions();
 }
 
