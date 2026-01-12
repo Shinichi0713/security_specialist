@@ -6,6 +6,28 @@
 
 ネットワークスペシャリストを目指すためのノウハウをつける。
 
+### コンテンツ
+
+
+<details markdown="1">
+<summary>
+コンテンツ
+</summary>
+
+
+
+#### 内容
+
+__学習コンテンツ__
+
+1. 無線LANのインフラ
+2. IPとTCP
+3. DNSの仕組み
+
+
+
+</details>
+
 ## Security Specialist
 
 ### 目的
@@ -75,4 +97,3 @@ Rustのスキルを付けて、Rustを使ったツールを作る。
 [Rust研究](https://github.com/Shinichi0713/NetworkTechnics/tree/main/rust_lesson)
 
 <img src="image/README/1767854562526.png" width=500 style="display: block; margin: 0 auto;">
-
